@@ -1,0 +1,4 @@
+train: /home/shataxi.dubey/shataxi_work/vlm_on_planet/dynamic_train
+val: /home/shataxi.dubey/shataxi_work/vlm_on_planet/gms/west_bengal_small_639_sq_km/kiln_images/test
+nc: 1
+names: ['brick kilns with chimney']
