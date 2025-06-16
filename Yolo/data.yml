@@ -1,0 +1,6 @@
+
+train: /home/shataxi.dubey/shataxi_work/vlm_on_planet/Yolo/gms_images_train
+val: /home/shataxi.dubey/shataxi_work/vlm_on_planet/gms/lucknow_small_600_sq_km/kiln_images/valid
+nc: 1
+names: ["brick kilns with chimney"]
+    
