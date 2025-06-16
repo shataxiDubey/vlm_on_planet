@@ -1,0 +1,60 @@
+Geochat :
+directory : lucknow_airshed_most_15_planet : zeroshot results
+directory : lucknow_airshed_most_15_swinir : zeroshot results
+directory : lucknow_airshed_most_15_zoom17 : zeroshot results
+directory : uttar_pradesh_most_15_planet : zeroshot results
+directory : uttar_pradesh_most_15_swinir : zeroshot results
+directory : uttar_pradesh_most_15_zoom17 : zeroshot results
+directory : west_bengal_most_15_planet : zeroshot results
+directory : west_bengal_most_15_swinir : zeroshot results
+directory : west_bengal_most_15_zoom17 : zeroshot results
+
+Paligemma :
+directory : /home/shataxi.dubey/shataxi_work/vlm_on_planet/PaliGemma/fine-tune-paligemma : transformers finetune github code
+
+
+
+
+Do not use supervision
+
+# supervision is computing incorrect precision but recall is correct.
+
+from supervision import ConfusionMatrix
+import numpy as np
+preds = [
+        np.array(
+                    [
+                        [0.0, 0.0, 0.0, 0.0, 0, 0.9],
+                    ]
+                ),
+                np.array([[1.0, 1.0, 2.0, 2.0, 1, 0.8]])
+                ]
+targets = [np.array(
+                        [
+                            [0.0, 0.0, 3.0, 3.0, 0],
+                            [2.0, 2.0, 5.0, 5.0, 1],
+                            [6.0, 1.0, 8.0, 3.0, 1],
+                        ]
+                    ),
+                    np.array([[1.0, 1.0, 2.0, 2.0, 1]])
+                    ]
+cm = ConfusionMatrix.from_tensors(preds, targets, ['A','B'], 0.1, 0.1)
+cm.plot()
+
+
+Maestro does not support object detection for PaliGemma
+
+
+Use transformers code and add LoRA to it and see the results. If that also does not work then it means
+Paligemma is tunable using big vision only that uses jax. 
+Use Paligemma 2 finetuning on object detection using the roboflow guide
+https://github.com/roboflow/notebooks/blob/main/notebooks/how-to-finetune-paligemma2-on-detection-dataset.ipynb
+
+
+Maestro needs transformers=4.49.0, roboflow notebook with paligemma needs transformers=4.47.0
+
+/home/shataxi.dubey/shataxi_work/vlm_on_planet/PaliGemma/my_pretrained_10b contains paligemma 10b finetuned model. It will load on all GPUs 
+/home/shataxi.dubey/shataxi_work/vlm_on_planet/PaliGemma/my_pretrained_processor_10b contains paligemma 10b finetuned processor
+
+Lucknow grid is 60x60 sqkm from urbanemissions.
+/home/shataxi.dubey/shataxi_work/vlm_on_planet/data/processed_data/lucknow_airshed/images contains images (320x320px) with overlap of 64px
